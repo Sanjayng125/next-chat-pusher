@@ -44,8 +44,8 @@ export const POST = async (req: Request) => {
                     users: chat.members
                 }
 
-                pusherServer.trigger(`newMessage-${chatId}`, "incoming-message", finalMessage)
-                pusherServer.trigger(`notification`, "newMessage", finalMessage)
+                await pusherServer.trigger(`newMessage-${chatId}`, "incoming-message", finalMessage)
+                await pusherServer.trigger(`notification`, "newMessage", finalMessage)
 
                 return Response.json({ success: true, message: "Sent", newMessage: finalMessage }, { status: 200 })
             }
