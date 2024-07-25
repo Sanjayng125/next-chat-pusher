@@ -35,10 +35,6 @@ export default function Chat() {
     };
   }, [selectedChat, session?.user, notifications]);
 
-  useEffect(() => {
-    console.log(notifications);
-  }, [notifications]);
-
   return (
     <>
       <div
