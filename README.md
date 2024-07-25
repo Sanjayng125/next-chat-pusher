@@ -1,36 +1,28 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## NextChat - Realtime chat app with Next JS and Pusher
 
-## Getting Started
+# Auth with next auth
+![Screenshot 2024-07-10 094310](https://github.com/Sanjayng125/next-chat/assets/106653066/98d158bc-52c3-4aff-8eaa-784ee50e8fee)
 
-First, run the development server:
+# Home
+![Screenshot 2024-07-10 094333](https://github.com/Sanjayng125/next-chat/assets/106653066/1f926ecd-373b-4a23-bea1-96cd4c1700e3)
+![Screenshot 2024-07-10 095115](https://github.com/Sanjayng125/next-chat/assets/106653066/0329d2b6-925b-4f8f-bd95-20b62512f578)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# Chat one-to-one
+![Screenshot 2024-07-10 094449](https://github.com/Sanjayng125/next-chat/assets/106653066/1d82860a-3660-4f78-9f78-e8325dd790cb)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Create Groups
+![Screenshot 2024-07-10 094600](https://github.com/Sanjayng125/next-chat/assets/106653066/9cf089dd-b4eb-4142-a82e-d9055866905b)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Group Chats
+![Screenshot 2024-07-10 094930](https://github.com/Sanjayng125/next-chat/assets/106653066/58bb59b6-e431-475e-9b10-fdc671503d8e)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Edit Group, Add/Remove members, Delete Group
+![Screenshot 2024-07-10 094958](https://github.com/Sanjayng125/next-chat/assets/106653066/639f1a37-3502-4f2c-b218-f5851e8ac119)
+![Screenshot 2024-07-10 095013](https://github.com/Sanjayng125/next-chat/assets/106653066/fc027ecc-be8f-4a78-aaf9-6e82c07609da)
 
-## Learn More
+# Edit Profile
+![Screenshot 2024-07-10 095041](https://github.com/Sanjayng125/next-chat/assets/106653066/1eeda7ad-ecea-4602-8226-8ceceb4767a9)
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1) Git Clone<br>
+2) Setup .env files<br>
+3) npm install and npm run dev<br>
