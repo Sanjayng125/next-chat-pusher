@@ -1,4 +1,4 @@
-## NextChat - Realtime chat app with Next JS and Pusher
+## NextChat - A Realtime chat app with Next JS, Pusher, Redis and MongoDB
 
 # Auth with next auth
 ![Screenshot 2024-07-10 094310](https://github.com/Sanjayng125/next-chat/assets/106653066/98d158bc-52c3-4aff-8eaa-784ee50e8fee)
@@ -9,6 +9,9 @@
 
 # Chat one-to-one
 ![Screenshot 2024-07-10 094449](https://github.com/Sanjayng125/next-chat/assets/106653066/1d82860a-3660-4f78-9f78-e8325dd790cb)
+
+# Realtime Notifications with Redis
+![Screenshot 2024-07-26 173527](https://github.com/user-attachments/assets/e0a13cb5-7a06-4f5a-a72d-3b8dad95fccc)
 
 # Create Groups
 ![Screenshot 2024-07-10 094600](https://github.com/Sanjayng125/next-chat/assets/106653066/9cf089dd-b4eb-4142-a82e-d9055866905b)
