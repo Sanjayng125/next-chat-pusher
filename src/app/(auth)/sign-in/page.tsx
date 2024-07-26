@@ -8,7 +8,6 @@ import { LoginSchema } from "@/schemas/zodSchemas";
 import { signIn } from "next-auth/react";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import {
   Form,
   FormControl,
@@ -45,25 +44,6 @@ export default function Signin() {
       });
 
       if (res?.error) {
-        // if (res.error.toLocaleLowerCase().includes("incorrect password")) {
-        //   toast({
-        //     title: "Signin failed",
-        //     description: "Incorrect Password",
-        //     variant: "destructive",
-        //   });
-        // } else if (res.error.toLocaleLowerCase().includes("user not found!")) {
-        //   toast({
-        //     title: "Signin failed",
-        //     description: "User not found!",
-        //     variant: "destructive",
-        //   });
-        // } else {
-        //   toast({
-        //     title: "Signin failed",
-        //     description: "Something went wrong",
-        //     variant: "destructive",
-        //   });
-        // }
         toast({
           title: "Signin failed",
           description: "Invalid Email or Password",

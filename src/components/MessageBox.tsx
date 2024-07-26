@@ -27,9 +27,11 @@ export default function MessageBox() {
   const scroll = useRef<HTMLDivElement | null>(null);
   const {} = useMyStore();
   const [loading, setLoading] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (selectedChat) {
+      inputRef?.current?.focus();
       handleGetMessages();
     }
   }, [selectedChat]);
@@ -97,7 +99,7 @@ export default function MessageBox() {
 
   //scroll to bottom
   useEffect(() => {
-    scroll.current?.scrollIntoView({ behavior: "smooth" });
+    scroll?.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   return (
@@ -218,6 +220,7 @@ export default function MessageBox() {
       {/* Input */}
       <div className="w-full h-min bg-white dark:bg-black p-2 pt-0 flex items-center box-border gap-2">
         <Input
+          ref={inputRef}
           className="flex-1 outline-none focus-visible:ring-0 text-xl"
           placeholder="Message"
           value={message}

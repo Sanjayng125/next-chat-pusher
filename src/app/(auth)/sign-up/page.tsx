@@ -50,8 +50,6 @@ export default function Signup() {
       });
       const resData = await res.json();
 
-      // console.log("resData in register page", resData);
-
       if (!resData?.success) {
         if (
           resData?.message?.toLocaleLowerCase().includes("email already taken!")

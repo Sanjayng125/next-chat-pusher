@@ -8,6 +8,8 @@ import { getMyChats } from "@/lib/actions";
 import Image from "next/image";
 import { Loader2 } from "lucide-react";
 import { formatTime } from "@/lib/utils";
+import { setNotificationsToRedis } from "@/lib/redis";
+import { ChatProps } from "@/types";
 
 export default function ChatBox() {
   const {
@@ -42,6 +44,18 @@ export default function ChatBox() {
     if (session?.user) fetchMyChats();
   }, [session?.user]);
 
+  const handleChatClick = (chat: ChatProps) => {
+    if (selectedChat?._id !== chat._id) {
+      setMessages([]);
+      setSelectedChat(chat);
+      removeNotification(chat._id);
+      const updatedNotifications = notifications.filter(
+        (noti) => noti.chatId !== chat._id
+      );
+      setNotificationsToRedis([...updatedNotifications]);
+    }
+  };
+
   return (
     <>
       <Search />
@@ -64,13 +78,7 @@ export default function ChatBox() {
                   className={`w-full hover:theme-secondary dark:hover:theme-dark-secondary p-3 flex items-center justify-between gap-2 ${
                     selectedChat?._id === chat._id && "theme-secondary"
                   }`}
-                  onClick={() => {
-                    if (selectedChat?._id !== chat._id) {
-                      setMessages([]);
-                      setSelectedChat(chat);
-                      removeNotification(chat._id);
-                    }
-                  }}
+                  onClick={() => handleChatClick(chat)}
                   key={i}
                 >
                   <div className="w-full flex items-center gap-2">
@@ -108,22 +116,31 @@ export default function ChatBox() {
                       {notifications.find(
                         (noti) => noti.chatId === chat._id
                       ) && (
-                        <p className="text-sm font-semibold w-full flex items-center justify-between">
-                          <span className="truncate">
+                        <div className="text-sm font-semibold w-full flex items-center justify-between">
+                          <p className="truncate">
                             {
                               notifications.find(
                                 (noti) => noti.chatId === chat._id
                               )?.message
                             }
-                          </span>
-                          <span>
-                            {formatTime(
-                              notifications.find(
-                                (noti) => noti.chatId === chat._id
-                              )?.createdAt!
-                            )}
-                          </span>
-                        </p>
+                          </p>
+                          <p className="flex items-center gap-2">
+                            <span>
+                              {formatTime(
+                                notifications.find(
+                                  (noti) => noti.chatId === chat._id
+                                )?.createdAt!
+                              )}
+                            </span>
+                            <span className="text-xs bg-green-500 font-semibold rounded-full px-2 py-0.5">
+                              {
+                                notifications.find(
+                                  (noti) => noti.chatId === chat._id
+                                )?.count!
+                              }
+                            </span>
+                          </p>
+                        </div>
                       )}
                     </div>
                   </div>

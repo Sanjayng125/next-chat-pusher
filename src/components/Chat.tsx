@@ -7,9 +7,19 @@ import { useMyStore } from "@/context/ZustandStore";
 import { pusherClient } from "@/lib/pusher";
 import { MessageProps } from "@/types";
 import { useSession } from "next-auth/react";
+import {
+  getNotificationsFromRedis,
+  setNotificationsToRedis,
+} from "@/lib/redis";
 
 export default function Chat() {
-  const { selectedChat, addNotification, notifications } = useMyStore();
+  const {
+    selectedChat,
+    setNotifications,
+    addNotification,
+    incrementCount,
+    notifications,
+  } = useMyStore();
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -18,14 +28,36 @@ export default function Chat() {
       if (
         session?.user &&
         data.sender._id !== session?.user?._id &&
-        selectedChat?._id !== data?.chatId &&
-        notifications.findIndex((noti) => noti.chatId === data.chatId) === -1
+        selectedChat?._id !== data?.chatId
       ) {
-        addNotification({
-          chatId: data.chatId,
-          message: data.content,
-          createdAt: data.createdAt,
-        });
+        if (
+          notifications.findIndex((noti) => noti.chatId === data.chatId) === -1
+        ) {
+          addNotification({
+            chatId: data.chatId,
+            message: data.content,
+            createdAt: data.createdAt,
+            count: 1,
+          });
+          setNotificationsToRedis([
+            ...notifications,
+            {
+              chatId: data.chatId,
+              message: data.content,
+              createdAt: data.createdAt,
+              count: 1,
+            },
+          ]);
+        } else {
+          // increment count
+          incrementCount(data.chatId);
+          const updatedNotifications = notifications.map((noti) =>
+            noti.chatId === data.chatId
+              ? { ...noti, count: noti.count + 1 }
+              : noti
+          );
+          setNotificationsToRedis([...updatedNotifications]);
+        }
       }
     });
 
@@ -34,6 +66,18 @@ export default function Chat() {
       pusherClient.unsubscribe(`notification`);
     };
   }, [selectedChat, session?.user, notifications]);
+
+  useEffect(() => {
+    const getNotifications = async () => {
+      const redisNotifications = await getNotificationsFromRedis();
+      if (redisNotifications.length > 0) {
+        setNotifications(redisNotifications);
+      }
+    };
+    if (session?.user) {
+      getNotifications();
+    }
+  }, [session?.user.email]);
 
   return (
     <>
