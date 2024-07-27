@@ -101,7 +101,7 @@ export default function ChatBox() {
                             : chat?.members[0].username}
                         </span>
                         {!chat.isGroup &&
-                        members.indexOf(chat?.members[0].email!) !== -1 ? (
+                        members.has(chat?.members[0].email!) ? (
                           <span className="text-xs text-green-500 font-semibold">
                             Online
                           </span>

@@ -30,7 +30,7 @@ export function ChatProfileModel() {
   const [newAvatar, setNewAvatar] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const isActive = members.indexOf(selectedChat?.members[0].email!) !== -1;
+  const isActive = members.has(selectedChat?.members[0].email!);
 
   const handleGroupNameChange = async () => {
     if (selectedChat?.isGroup) {
