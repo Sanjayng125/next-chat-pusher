@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Search from "./Search";
 import { useMyStore } from "@/context/ZustandStore";
 import { useSession } from "next-auth/react";
 import { getMyChats } from "@/lib/actions";
@@ -58,7 +57,6 @@ export default function ChatBox() {
 
   return (
     <>
-      <Search />
       <div className="w-full h-[calc(100vh-164px)] overflow-y-auto">
         {loading && myChats?.length === 0 && (
           <Loader2 className="w-10 h-10 mx-auto animate-spin" />

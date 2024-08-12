@@ -4,7 +4,7 @@ import { getChat, getMyChats } from "@/lib/actions";
 import { UserProps } from "@/types";
 import { Loader2, SearchIcon, X } from "lucide-react";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Search = () => {
   const state = useMyStore();
@@ -41,37 +41,42 @@ const Search = () => {
     }
   };
 
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
-    <div className="h-11 flex items-center gap-2 border-2 rounded-md border-black border-opacity-10 dark:border-white dark:border-opacity-30 p-1 m-2 relative">
-      <input
-        type="text"
-        className="outline-none w-full dark:bg-transparent p-1"
-        placeholder="Search"
-        value={searchInput}
-        onChange={(e) => {
-          // if (e.target.value === "") setSearchResults([]);
-          setSearchInput(e.target.value);
-        }}
-        onKeyDown={(e) => e.key === "Enter" && !loading && getUsers()}
-      />
-      <button
-        className="text-2xl hover:scale-95"
-        onClick={getUsers}
-        disabled={loading}
-      >
-        {loading ? <Loader2 className="animate-spin" /> : <SearchIcon />}
-      </button>
+    <div className="h-full flex flex-col items-center justify-center gap-2 border-2 rounded-md border-black border-opacity-10 dark:border-white dark:border-opacity-30 p-1 m-2 relative">
+      <div className="w-full h-max flex items-center relative">
+        <input
+          type="text"
+          className="outline-none w-full dark:bg-transparent p-1"
+          placeholder="Search"
+          value={searchInput}
+          onChange={(e) => {
+            setSearchInput(e.target.value);
+          }}
+          onKeyDown={(e) => e.key === "Enter" && !loading && getUsers()}
+        />
+        <button
+          className="text-2xl hover:scale-95 absolute right-2 top-1/2 -translate-y-1/2"
+          onClick={getUsers}
+          disabled={loading}
+        >
+          {loading ? <Loader2 className="animate-spin" /> : <SearchIcon />}
+        </button>
+      </div>
       {searchResults.length > 0 && (
-        <div className="w-full flex flex-col gap-2 border-2 rounded-md overflow-x-hidden max-h-60 overflow-y-auto absolute left-0 top-[45px] z-10 bg-white dark:bg-black">
+        <div className="w-full h-full flex flex-col gap-2 border-2 rounded-md overflow-x-hidden max-h-60 overflow-y-auto bg-white dark:bg-slate-900 p-1">
           <div className="flex items-center justify-between px-2 py-1 border-b-2">
-            <p>Search/Explore Users</p>
+            <p>Search Results</p>
             <button onClick={() => setSearchResults([])}>
               <X />
             </button>
           </div>
           {searchResults.map((res, i) => (
             <button
-              className="hover:theme-secondary dark:hover:theme-dark-secondary p-1 flex items-center gap-2"
+              className="hover:theme-secondary dark:hover:theme-dark-secondary p-1 flex items-center gap-2 rounded-lg"
               onClick={() => handleClick(res._id)}
               key={i}
             >

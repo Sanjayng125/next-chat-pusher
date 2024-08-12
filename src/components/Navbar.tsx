@@ -15,6 +15,7 @@ import {
 } from "./ui/navigation-menu";
 import { CreateGroupModel } from "./CreateGroupModel";
 import { ProfileModel } from "./ProfileModel";
+import { SearchModel } from "./SearchModel";
 
 export default function Navbar() {
   const { data: session, status } = useSession();
@@ -25,6 +26,7 @@ export default function Navbar() {
     <div className="flex items-center justify-between p-3 border-b-2 gap-2 z-50 h-16">
       <h1 className="text-2xl font-bold">NextChat</h1>
       <div className="flex items-center gap-2">
+        <SearchModel />
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
