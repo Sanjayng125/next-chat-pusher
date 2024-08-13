@@ -26,7 +26,7 @@ export default function Navbar() {
     <div className="flex items-center justify-between p-3 border-b-2 gap-2 z-50 h-16">
       <h1 className="text-2xl font-bold">NextChat</h1>
       <div className="flex items-center gap-2">
-        <SearchModel />
+        {session?.user && status === "authenticated" && <SearchModel />}
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
